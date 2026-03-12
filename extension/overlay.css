@@ -1,0 +1,147 @@
+/* ═══════════════════════════════════════════════════════════════
+   Prism Shopify Guide — Overlay Styles
+   Renders on top of the Shopify admin to highlight next actions.
+   ═══════════════════════════════════════════════════════════════ */
+
+.prism-overlay-root {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483646; /* max - 1 */
+  pointer-events: none;
+}
+
+/* Full-screen click-blocker: absorbs all clicks except on the highlight */
+.prism-blocker {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483640;
+  pointer-events: all;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  transition: opacity 0.3s ease;
+}
+
+/* Highlighted target element */
+.prism-highlight {
+  position: fixed;
+  z-index: 2147483645;
+  pointer-events: all;
+  cursor: pointer;
+  border: 3px solid #00c389;
+  border-radius: 8px;
+  background: rgba(0, 195, 137, 0.08);
+  box-shadow:
+    0 0 0 4px rgba(0, 195, 137, 0.25),
+    0 0 20px rgba(0, 195, 137, 0.15),
+    inset 0 0 12px rgba(0, 195, 137, 0.05);
+  animation: prism-pulse-border 2s ease-in-out infinite;
+  transition: all 0.3s ease;
+}
+
+.prism-highlight:hover {
+  border-color: #00e6a0;
+  background: rgba(0, 195, 137, 0.14);
+  box-shadow:
+    0 0 0 6px rgba(0, 195, 137, 0.35),
+    0 0 30px rgba(0, 195, 137, 0.2),
+    inset 0 0 16px rgba(0, 195, 137, 0.08);
+}
+
+@keyframes prism-pulse-border {
+  0%, 100% {
+    box-shadow:
+      0 0 0 4px rgba(0, 195, 137, 0.25),
+      0 0 20px rgba(0, 195, 137, 0.15);
+  }
+  50% {
+    box-shadow:
+      0 0 0 8px rgba(0, 195, 137, 0.15),
+      0 0 40px rgba(0, 195, 137, 0.1);
+  }
+}
+
+/* Instruction tooltip */
+.prism-tooltip {
+  position: fixed;
+  z-index: 2147483646;
+  pointer-events: none;
+  max-width: 340px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  background: #1a1a2e;
+  color: #ffffff;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.15);
+  animation: prism-fade-in 0.3s ease forwards;
+}
+
+.prism-tooltip::before {
+  content: '👆 ';
+}
+
+/* Step counter pill */
+.prism-step-pill {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 2147483647;
+  pointer-events: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #00c389, #00a877);
+  color: #ffffff;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  box-shadow: 0 4px 16px rgba(0, 195, 137, 0.3);
+  animation: prism-fade-in 0.3s ease forwards;
+}
+
+@keyframes prism-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Persistent HUD container — always visible during guide */
+#prism-hud {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483647; /* above everything including overlay */
+  pointer-events: none;
+}
+
+/* Stop button — top left */
+.prism-stop-btn {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 2147483647;
+  pointer-events: all;
+  padding: 8px 18px;
+  border-radius: 20px;
+  border: 2px solid rgba(255, 80, 80, 0.4);
+  background: rgba(180, 30, 30, 0.85);
+  color: #ffffff;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px rgba(180, 30, 30, 0.3);
+  transition: all 0.2s ease;
+  animation: prism-fade-in 0.3s ease forwards;
+}
+
+.prism-stop-btn:hover {
+  background: rgba(220, 40, 40, 0.9);
+  border-color: rgba(255, 100, 100, 0.6);
+  transform: scale(1.05);
+}
