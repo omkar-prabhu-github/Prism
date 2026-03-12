@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "Prism — Shopify Guide",
+  "version": "1.0.1",
+  "description": "AI-powered visual step-by-step guide for Shopify admin. Highlights buttons and walks you through any task.",
+  "permissions": ["tabs"],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "service-worker.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.myshopify.com/admin/*",
+        "https://admin.shopify.com/*"
+      ],
+      "js": ["content-script.js"],
+      "css": ["overlay.css"],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["overlay.css"],
+      "matches": ["https://*.myshopify.com/*", "https://admin.shopify.com/*"]
+    }
+  ]
+}
+ 
