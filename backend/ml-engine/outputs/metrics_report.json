@@ -1,0 +1,14 @@
+{
+    "best_model": "KMeans",
+    "optimal_k": 5,
+    "silhouette_score": 0.2232651792373201,
+    "calinski_harabasz": 1384.651317603581,
+    "davies_bouldin": 1.3036656336225543,
+    "label_mapping": {
+        "1": "High Performer",
+        "2": "Attract but Don't Convert",
+        "3": "Low Engagement Product",
+        "0": "Invisible Product",
+        "4": "Trust Issue Product"
+    }
+}   
